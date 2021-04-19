@@ -1,21 +1,45 @@
 .pool {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto;
-  row-gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pool-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   margin: 1rem;
+  div {
+    margin: 0 0.5rem;
+  }
+}
+
+.pool-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__header {
+    width: 23em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    button {
+      margin-bottom: 0.5em !important;
+    }
+  }
 }
 
 .pool-textbox {
-  // margin-bottom: 1rem !important;
   width: 25em;
 }
 
 .pool-images {
-  // text-align: center;
-  // display: flex;
-  // flex-wrap: wrap;
-  // justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card-pic {

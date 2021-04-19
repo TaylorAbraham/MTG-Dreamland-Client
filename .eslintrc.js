@@ -22,6 +22,7 @@ module.exports = {
     'import/no-named-as-default': 0,
     // Allow having a single named export, such as a constants file with a single export
     'import/prefer-default-export': 0,
+    'no-debugger': 1,
     'no-nested-ternary': 0,
     'no-plusplus': 0,
     // Allow unused variables if they are prefixed with an underscore

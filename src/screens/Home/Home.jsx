@@ -13,7 +13,7 @@ const Home = () => {
           <Typography variant="h5">Check out our generators</Typography>
           <div className="home__links-buttons">
             <Link to="/pool">
-              <Button variant="contained" color="primary">
+              <Button size="large" variant="contained" color="primary">
                 Random Pool
               </Button>
             </Link>

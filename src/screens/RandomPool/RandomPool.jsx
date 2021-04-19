@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import fetch from 'node-fetch';
-import { TextField, Snackbar, IconButton } from '@material-ui/core';
+import { TextField, Snackbar, IconButton, Typography, Button } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
-import { Close as CloseIcon } from '@material-ui/icons';
+import CloseIcon from '@material-ui/icons/Close';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 import { useLocation } from 'react-router-dom';
 import { SERVER_URL } from '../../constants';
 import './RandomPool.scss';
@@ -16,6 +17,8 @@ const RandomPool = () => {
   const [cards, setCards] = useState([]);
   const [poolUUID, setPoolUUID] = useState('');
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const poolTextRef = useRef(null);
+  const poolLinkRef = useRef(null);
   const paramQuery = useQuery();
   const uuidParam = paramQuery.get('uuid');
   const baseURL = window.location.href.split('?')[0];
@@ -55,8 +58,12 @@ const RandomPool = () => {
     setSnackbarOpen(false);
   };
 
-  const selectAllAndCopy = (e) => {
+  const selectAll = (e) => {
     e.target.select(); // Highlight whole textarea on select
+  };
+
+  const copyFromRef = (ref) => {
+    ref.current.select();
     document.execCommand('copy');
     setSnackbarOpen(true);
   };
@@ -65,25 +72,49 @@ const RandomPool = () => {
     <div>
       {cards && (
         <div className="pool">
-          {poolUUID && (
-            <TextField
-              className="pool-textbox"
-              label="URL"
-              variant="outlined"
-              value={`${baseURL}?uuid=${poolUUID}`}
-              onFocus={selectAllAndCopy}
-            />
-          )}
-          <div>
-            <TextField
-              className="pool-textbox"
-              label="Cards"
-              multiline
-              rows={10}
-              value={cards.map((card) => card.name).join('\n')}
-              variant="outlined"
-              onFocus={selectAllAndCopy}
-            />
+          <div className="pool-info">
+            <div className="pool-link">
+              <div className="pool-link__header">
+                <Typography variant="h6">Your pool</Typography>
+                <Button
+                  size="small"
+                  variant="contained"
+                  startIcon={<FileCopyIcon />}
+                  onClick={() => copyFromRef(poolTextRef)}
+                >
+                  Copy
+                </Button>
+              </div>
+              <TextField
+                className="pool-textbox"
+                inputRef={poolTextRef}
+                multiline
+                rows={10}
+                value={cards.map((card) => card.name).join('\n')}
+                variant="outlined"
+                onFocus={selectAll}
+              />
+            </div>
+            <div className="pool-link">
+              <div className="pool-link__header">
+                <Typography variant="h6">Link to your pool</Typography>
+                <Button
+                  size="small"
+                  variant="contained"
+                  startIcon={<FileCopyIcon />}
+                  onClick={() => copyFromRef(poolLinkRef)}
+                >
+                  Copy
+                </Button>
+              </div>
+              <TextField
+                className="pool-textbox"
+                inputRef={poolLinkRef}
+                variant="outlined"
+                value={`${baseURL}?uuid=${poolUUID}`}
+                onFocus={selectAll}
+              />
+            </div>
           </div>
           <div className="pool-images">
             {cards.map((card) => (
@@ -95,7 +126,7 @@ const RandomPool = () => {
           <Snackbar
             anchorOrigin={{
               vertical: 'top',
-              horizontal: 'center',
+              horizontal: 'left',
             }}
             open={snackbarOpen}
             autoHideDuration={4000}

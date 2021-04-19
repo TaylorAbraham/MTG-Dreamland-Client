@@ -1,8 +1,12 @@
+body {
+  background-color: #f3f3f3;
+}
+
 .app {
   .v-divider {
     height: 2.5em;
     margin: 0 1em 0.15em 1em;
-    border-left: 1px rgba(0, 0, 0, 0.3) solid;
+    border-left: 2px rgba(0, 0, 0, 0.75) solid;
   }
 
   &__title {
