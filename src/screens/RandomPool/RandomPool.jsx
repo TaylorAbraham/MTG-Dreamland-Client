@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import fetch from 'node-fetch';
-import { TextField, Snackbar, IconButton, Typography, Button } from '@material-ui/core';
+import { TextField, Snackbar, IconButton, Typography, Button, CircularProgress } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import CloseIcon from '@material-ui/icons/Close';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
@@ -70,7 +70,7 @@ const RandomPool = () => {
 
   return (
     <div>
-      {cards && (
+      {cards ? (
         <div className="pool">
           <div className="pool-info">
             <div className="pool-link">
@@ -139,6 +139,10 @@ const RandomPool = () => {
               </IconButton>
             </Alert>
           </Snackbar>
+        </div>
+      ) : (
+        <div className="loading">
+          <CircularProgress size="5rem" />
         </div>
       )}
     </div>
