@@ -73,3 +73,14 @@
     }
   }
 }
+
+.footer {
+  background-color: rgb(25, 25, 25);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  a {
+    color: white;
+  }
+}

@@ -26,6 +26,26 @@ const App = () => {
       </AppBar>
       <Route exact path="/" component={Home} />
       <Route exact path="/pool" component={RandomPool} />
+      <Toolbar className="footer">
+        <Typography>
+          Created with ♥ by{' '}
+          <a href="http://taylorabraham.com/" target="_blank" rel="noreferrer">
+            Taylor Abraham
+          </a>
+          .
+        </Typography>
+        <Typography>
+          Landing image by{' '}
+          <a href="https://pixabay.com/users/kollsd-14736411/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5673499">
+            Dung Tran
+          </a>{' '}
+          from{' '}
+          <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5673499">
+            Pixabay
+          </a>
+          .
+        </Typography>
+      </Toolbar>
     </div>
   );
 };
