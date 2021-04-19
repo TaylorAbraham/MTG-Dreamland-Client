@@ -6,6 +6,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useParams } from 'react-router-dom';
 import './App.scss';
 
+const SERVER_URL = 'http://localhost:8080';
+
 const App = () => {
   const [cards, setCards] = useState([]);
   const [poolUUID, setPoolUUID] = useState('');
@@ -14,10 +16,10 @@ const App = () => {
   const { uuid: uuidParam } = useParams();
 
   const fetchPool = useCallback(() => {
-    let fetchURL = '/random-pool';
+    let fetchURL = `${SERVER_URL}/random-pool`;
     if (uuidParam) {
       setPoolUUID(uuidParam);
-      fetchURL = `/random-pool/${uuidParam}`;
+      fetchURL = `${SERVER_URL}/random-pool/${uuidParam}`;
     }
     fetch(fetchURL)
       .then((res) => res.json())
