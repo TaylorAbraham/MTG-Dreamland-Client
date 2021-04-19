@@ -13,8 +13,6 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    // Only ok in server files
-    'no-console': 0,
     // Allow braces around return-only arrow functions, for better readability
     'arrow-body-style': 0,
     // Allow arrow functions without return statements
@@ -33,13 +31,7 @@ module.exports = {
     ],
     // Allow the use of non-template strings when it would be cleaner to do so
     'prefer-template': 0,
-    // Disable prop types. Instead, create TypeScript prop interfaces
-    'react/prop-types': 0,
-    // This rule conflicts with Prettier
-    'react/jsx-curly-newline': 0,
-    // RN has trouble with jsx files, so we can't use them
-    'react/jsx-filename-extension': 0,
-    // Allow prop spreading for custom components
+    // Allow prop spreading for custom components I.E. <img {...props} />
     'react/jsx-props-no-spreading': 0,
   },
 };
