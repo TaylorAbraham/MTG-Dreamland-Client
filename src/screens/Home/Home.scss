@@ -1,10 +1,12 @@
 .home {
-  width: 100%;
-  height: calc(100vh - 64px);
-  background-image: url('starscape.png');
-  display: flex;
+  &__splash {
+    width: 100%;
+    height: calc(100vh - 64px);
+    background-image: url('starscape.png');
+    display: flex;
+  }
 
-  &__content {
+  &__splash-content {
     background: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     text-align: center;
@@ -20,8 +22,14 @@
   &__links-buttons {
     margin-top: 1rem;
     a {
-      color: black;
       text-decoration: none;
+    }
+  }
+
+  &__body {
+    padding: 3rem 10rem;
+    @media (min-width: 768px) {
+      padding: 3rem 20rem;
     }
   }
 }

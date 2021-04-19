@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
+import { purple } from '@material-ui/core/colors';
 import App from './screens/App/App';
 import reportWebVitals from './reportWebVitals';
 
@@ -15,7 +16,7 @@ const theme = createMuiTheme({
       main: '#3C1874',
     },
     secondary: {
-      main: '#283747',
+      main: purple[500],
     },
   },
 });

@@ -5,12 +5,16 @@ body {
 .app {
   .v-divider {
     height: 2.5em;
-    margin: 0 1em 0.15em 1em;
-    border-left: 2px rgba(0, 0, 0, 0.75) solid;
+    margin: 0 1em 0.15em 1.5em;
+    border-left: 1px rgba(255, 255, 255, 1) solid;
   }
 
   &__title {
     user-select: none;
+    a {
+      text-decoration: none;
+      color: white;
+    }
   }
 
   &__links {

@@ -13,7 +13,7 @@ const App = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className="app__title">
-            MTG Dreamland
+            <Link to="/">MTG Dreamland</Link>
           </Typography>
           <div className="v-divider" />
           <Link to="/" className={`underline-link ${path === '/' && 'current'}`}>

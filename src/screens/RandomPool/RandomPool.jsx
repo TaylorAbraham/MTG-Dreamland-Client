@@ -1,9 +1,21 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import fetch from 'node-fetch';
-import { TextField, Snackbar, IconButton, Typography, Button, CircularProgress } from '@material-ui/core';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  TextField,
+  Snackbar,
+  IconButton,
+  Typography,
+  Button,
+  CircularProgress,
+  Divider,
+} from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import CloseIcon from '@material-ui/icons/Close';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useLocation } from 'react-router-dom';
 import { SERVER_URL } from '../../constants';
 import './RandomPool.scss';
@@ -13,23 +25,21 @@ const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
+const STATES = Object.freeze({ INITIAL: 0, LOADING: 1, DONE: 2 });
+
 const RandomPool = () => {
   const [cards, setCards] = useState([]);
+  const [state, setState] = useState(STATES.INITIAL);
   const [poolUUID, setPoolUUID] = useState('');
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
   const poolTextRef = useRef(null);
   const poolLinkRef = useRef(null);
-  const paramQuery = useQuery();
-  const uuidParam = paramQuery.get('uuid');
+  const uuidParam = useQuery().get('uuid');
   const baseURL = window.location.href.split('?')[0];
 
-  const fetchPool = useCallback(() => {
-    let fetchURL = `${SERVER_URL}/random-pool`;
-    if (uuidParam) {
-      setPoolUUID(uuidParam);
-      fetchURL = `${SERVER_URL}/random-pool/${uuidParam}`;
-    }
-    fetch(fetchURL)
+  const fetchPool = (url) => {
+    setState(STATES.LOADING);
+    fetch(url || `${SERVER_URL}/random-pool`)
       .then((res) => res.json())
       .then((json) => {
         if (json.error) {
@@ -40,16 +50,20 @@ const RandomPool = () => {
           }
         } else {
           setCards(json.cards);
+          setState(STATES.DONE);
           if (json.uuid) {
             setPoolUUID(json.uuid);
           }
         }
       });
-  }, [uuidParam]);
+  };
 
   useEffect(() => {
-    fetchPool();
-  }, [fetchPool]);
+    if (uuidParam) {
+      setPoolUUID(uuidParam);
+      fetchPool(`${SERVER_URL}/random-pool/${uuidParam}`);
+    }
+  }, [uuidParam]);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -69,9 +83,42 @@ const RandomPool = () => {
   };
 
   return (
-    <div>
-      {cards ? (
+    <div className="root">
+      <div className="header">
+        <Accordion className="info-accordian">
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>What is this generator?</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Random pool is a generator that creates a hypothetical constructed format. It will pull random cards of
+              different colors, color pairs, lands, etc to create a set of cards. Share the link with your friends, and
+              see who can build the strongest deck! Online software such as Cockatrice and Untap.in can provide a place
+              to play for free.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Button
+          className="generate-button"
+          color="secondary"
+          size="large"
+          variant="contained"
+          onClick={() => fetchPool()}
+        >
+          Generate New Pool
+        </Button>
+      </div>
+      {state === STATES.LOADING && (
+        <>
+          <Divider />
+          <div className="loading">
+            <CircularProgress size="5rem" />
+          </div>
+        </>
+      )}
+      {state === STATES.DONE && (
         <div className="pool">
+          <Divider />
           <div className="pool-info">
             <div className="pool-link">
               <div className="pool-link__header">
@@ -92,6 +139,7 @@ const RandomPool = () => {
                 rows={10}
                 value={cards.map((card) => card.name).join('\n')}
                 variant="outlined"
+                color="primary"
                 onFocus={selectAll}
               />
             </div>
@@ -139,10 +187,6 @@ const RandomPool = () => {
               </IconButton>
             </Alert>
           </Snackbar>
-        </div>
-      ) : (
-        <div className="loading">
-          <CircularProgress size="5rem" />
         </div>
       )}
     </div>
