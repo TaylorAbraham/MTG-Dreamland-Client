@@ -1,0 +1,10 @@
+.home {
+  width: 100%;
+  height: calc(100vh - 64px);
+  background-image: url('starscape.png');
+  &__content {
+    text-align: center;
+    margin: auto;
+    color: white;
+  }
+}

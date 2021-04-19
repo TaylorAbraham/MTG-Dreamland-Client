@@ -1,19 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import fetch from 'node-fetch';
 import { TextField, Snackbar, IconButton } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
-import CloseIcon from '@material-ui/icons/Close';
-import { useParams } from 'react-router-dom';
-import './App.scss';
+import { Alert } from '@material-ui/lab';
+import { Close as CloseIcon } from '@material-ui/icons';
+import { useLocation } from 'react-router-dom';
+import { SERVER_URL } from '../../constants';
+import './RandomPool.scss';
 
-const SERVER_URL = 'http://localhost:8080';
+// A custom hook that builds on useLocation to parse the query string
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
 
-const App = () => {
+const RandomPool = () => {
   const [cards, setCards] = useState([]);
   const [poolUUID, setPoolUUID] = useState('');
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
-
-  const { uuid: uuidParam } = useParams();
+  const paramQuery = useQuery();
+  const uuidParam = paramQuery.get('uuid');
+  const baseURL = window.location.href.split('?')[0];
 
   const fetchPool = useCallback(() => {
     let fetchURL = `${SERVER_URL}/random-pool`;
@@ -57,7 +62,7 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div>
       {cards && (
         <div className="pool">
           {poolUUID && (
@@ -65,7 +70,7 @@ const App = () => {
               className="pool-textbox"
               label="URL"
               variant="outlined"
-              value={`${window.location.href}${poolUUID}`}
+              value={`${baseURL}?uuid=${poolUUID}`}
               onFocus={selectAllAndCopy}
             />
           )}
@@ -96,12 +101,12 @@ const App = () => {
             autoHideDuration={4000}
             onClose={handleClose}
           >
-            <MuiAlert elevation={6} variant="filled" severity="success">
+            <Alert elevation={6} variant="filled" severity="success">
               Copied to clipboard!
               <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
                 <CloseIcon fontSize="small" />
               </IconButton>
-            </MuiAlert>
+            </Alert>
           </Snackbar>
         </div>
       )}
@@ -109,4 +114,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default RandomPool;

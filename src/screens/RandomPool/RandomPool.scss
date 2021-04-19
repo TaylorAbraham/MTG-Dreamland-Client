@@ -1,12 +1,9 @@
-body {
-  margin: 20px;
-}
-
 .pool {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
   row-gap: 1rem;
+  margin: 1rem;
 }
 
 .pool-textbox {
