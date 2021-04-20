@@ -8,6 +8,9 @@ import './App.scss';
 const App = () => {
   const path = useLocation().pathname;
 
+  // TODO: Remove this when Heroku testing is done
+  console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+
   return (
     <div className="app">
       <AppBar position="static">
