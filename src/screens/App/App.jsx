@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { useLocation, Link, Route } from 'react-router-dom';
 import Home from '../Home/Home';
 import RandomPool from '../RandomPool/RandomPool';
 import './App.scss';
+import { SERVER_URL } from '../../constants';
 
 const App = () => {
   const path = useLocation().pathname;
 
-  // TODO: Remove this when Heroku testing is done
-  console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+  useEffect(() => {
+    fetch(`${SERVER_URL}/ping`); // Ping our server to wake it up
+  }, []);
 
   return (
     <div className="app">
