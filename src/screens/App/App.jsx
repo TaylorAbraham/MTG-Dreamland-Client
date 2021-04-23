@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 import { useLocation, Link, Route } from 'react-router-dom';
+import { FeedbackFish } from '@feedback-fish/react';
 import Home from '../Home/Home';
 import RandomPool from '../RandomPool/RandomPool';
 import './App.scss';
@@ -32,6 +34,16 @@ const App = () => {
       <Route exact path="/" component={Home} />
       <Route exact path="/pool" component={RandomPool} />
       <Toolbar className="footer">
+        <div className="m-2">
+          <FeedbackFish projectId="2454417672045a">
+            <Button variant="contained" size="small" color="secondary">
+              <FeedbackIcon className="mr-1" /> Send feedback
+            </Button>
+          </FeedbackFish>
+          <Button className="ml-2" variant="contained" size="small" color="secondary">
+            <FeedbackIcon className="mr-1" /> Buy Me a Coffee
+          </Button>
+        </div>
         <Typography>
           Created with ♥ by{' '}
           <a href="http://taylorabraham.com/" target="_blank" rel="noreferrer">
@@ -39,17 +51,19 @@ const App = () => {
           </a>
           .
         </Typography>
-        <Typography>
-          Landing image by{' '}
-          <a href="https://pixabay.com/users/kollsd-14736411/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5673499">
-            Dung Tran
-          </a>{' '}
-          from{' '}
-          <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5673499">
-            Pixabay
-          </a>
-          .
-        </Typography>
+        <div className="mb-1">
+          <Typography>
+            Landing image by{' '}
+            <a href="https://pixabay.com/users/kollsd-14736411/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5673499">
+              Dung Tran
+            </a>{' '}
+            from{' '}
+            <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5673499">
+              Pixabay
+            </a>
+            .
+          </Typography>
+        </div>
       </Toolbar>
     </div>
   );
