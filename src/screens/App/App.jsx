@@ -34,35 +34,43 @@ const App = () => {
       <Route exact path="/" component={Home} />
       <Route exact path="/pool" component={RandomPool} />
       <Toolbar className="footer">
-        <div className="m-2">
-          <FeedbackFish projectId="2454417672045a">
-            <Button variant="contained" size="small" color="secondary">
-              <FeedbackIcon className="mr-1" /> Send feedback
-            </Button>
-          </FeedbackFish>
-          <Button className="ml-2" variant="contained" size="small" color="secondary">
-            <FeedbackIcon className="mr-1" /> Buy Me a Coffee
-          </Button>
-        </div>
-        <Typography>
+        <Typography className="mt-1">
           Created with ♥ by{' '}
           <a href="http://taylorabraham.com/" target="_blank" rel="noreferrer">
             Taylor Abraham
           </a>
           .
         </Typography>
-        <div className="mb-1">
-          <Typography>
-            Landing image by{' '}
-            <a href="https://pixabay.com/users/kollsd-14736411/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5673499">
-              Dung Tran
-            </a>{' '}
-            from{' '}
-            <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5673499">
-              Pixabay
+        <Typography className="mb-1">
+          Landing image by{' '}
+          <a
+            href="https://pixabay.com/users/kollsd-14736411/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5673499"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Dung Tran
+          </a>{' '}
+          from{' '}
+          <a
+            href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5673499"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Pixabay
+          </a>
+          .
+        </Typography>
+        <div className="mb-2">
+          <FeedbackFish projectId="2454417672045a">
+            <Button variant="contained" size="small" color="secondary">
+              <FeedbackIcon className="mr-1" /> Send feedback
+            </Button>
+          </FeedbackFish>
+          <Button className="coffee-button ml-2" variant="contained" size="small" color="secondary">
+            <a href="https://www.buymeacoffee.com/taylorabraham" target="_blank" rel="noreferrer">
+              <img src="./coffee.png" className="coffee-button-icon mr-1" alt="Coffee Icon" /> Buy Me a Coffee
             </a>
-            .
-          </Typography>
+          </Button>
         </div>
       </Toolbar>
     </div>
